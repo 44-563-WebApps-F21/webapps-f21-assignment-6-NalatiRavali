@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <title>Assignment6</title>
+<title>Assignment6</title>
+
 <body>
     <h1>Pass phrase by Ravali Nalati</h1>
-<form>
-    <label for="form1_age">Enter the secret phrase</label>
-    <input type="password" id="form1_age" name="form1_age" min=10 max=50 step=2 value="let me in"> <br>
+    <form>
+        <label for="form1_age">Enter the secret phrase</label>
+        <input type="password" id="form1_age" name="form1_age" min=10 max=50 step=2 value="let me in"> <br>
 
-    <label for="form1_nick">Enter a phrase</label>
-    <input type="text" id="form1_nick" name="form1_nick" autofocus> <br>
+        <label for="form1_nick">Enter a phrase</label>
+        <input type="text" id="form1_nick" name="form1_nick" autofocus> <br>
 
-    <input type="button" onclick="processPhrase()" value="Check the phrase">
-</form>
+        <input type="button" onclick="processPhrase()" value="Check the phrase">
+    </form>
 
 
-<div class="container borders">
-    <p id="result">This text will be replaced </p>
-</div>
-<div class="container">
-    <img id="image" src="./Images/nightingale.jpg" class="img-fluid" alt="Nightingale" height="200" width="200" onclick="newImage()">
-</div>
-<script>
-    let usingImage = 1;
-    let correct = 0;
-    let wrong = 0;
-    function processPhrase() {
-        console.log("Getting form values")
-        age = document.getElementById("form1_age").value
-        nick = document.getElementById("form1_nick").value
-        // confirmed = confirm("Are these the values? " + age + " and " + nick)
-        
-        
-        out = document.getElementById("result")
-        if (age==nick) {
-            alert("Access allowed")
-            correct = correct+1
-            out.innerHTML = "correct : "+correct+" wrong : "+wrong
+    <div class="container borders">
+        <p id="result">This text will be replaced </p>
+    </div>
+    <div class="container">
+        <img id="image" src="./Images/nightingale.jpg" class="img-fluid" alt="Nightingale" height="200" width="200"
+            onclick="newImage()">
+    </div>
+    <script>
+        let usingImage = 1;
+        let correct = 0;
+        let wrong = 0;
+        var lat = 0;
+        var past = 0;
+        function processPhrase() {
+            console.log("Getting form values")
+            age = document.getElementById("form1_age").value
+            nick = document.getElementById("form1_nick").value
             
-        } else {
-            alert("Access denied")
-            wrong = wrong+1
-            out.innerHTML = "correct : "+correct+" wrong : "+wrong
+
+
+            out = document.getElementById("result")
+            if (age == nick) {
+                lat = 0;
+                alert("Access allowed")
+                correct = correct + 1
+                out.innerHTML = "correct : " + correct + " wrong : " + wrong
+
+            } else {
+                alert("Access denied")
+                wrong = wrong + 1
+                lat = lat + 1
+                out.innerHTML = "correct : " + correct + " wrong : " + wrong
+                if (lat >= 3) {
+                    if (wrong >= 3) {
+                        incorrectPassphrase()
+                    }
+                }
+            }
         }
-    }
-    function newImage() {
+
+        function incorrectPassphrase() {
+            alert("account locked")
+        }
+        function newImage() {
             image = document.getElementById("image")
             switch (usingImage) {
                 case 1:
@@ -62,9 +77,8 @@
                     break
             }
         }
-</script>
-
-
+    </script>
 
 </body>
-</html> 
+
+</html>

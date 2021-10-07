@@ -2,7 +2,9 @@
 <html>
 
 <head>
-    <title>loop computation</title>
+    <title>
+        Calculation
+    </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,71 +20,77 @@
 
 <body>
 
-    <h2>Ravali Nalati computes</h2>
+    <h1>Ravali Nalati computes</h1>
 
-    <form class="container">
-        <label for="form1_base">Enter a base</label>
-        <input type="number" id="form1_base" name="form1_base" value=10> <br>
+    <div class="container border bg-info">
+        <form>
+            <div class="form-group">
+                <label for="first_value" class="col-sm-2 col-form-label">Enter a base </label>
+                <input type="number" class="col-sm-2 form-control" id="first_value" name="first_value" value=10> <br>
+            </div>
+            <div class="form-group">
+                <label for="second_value" class="col-sm-2 col-form-label">Enter an exponent </label>
+                <input type="number" class="col-sm-2 form-control" id="second_value" name="second_value" value=2> <br>
+            </div>
+            <input type="button" class="col-sm-2 btn btn-primary" onclick="powers()" value="compute">
+        </form>
+    </div>
+    <div class="container border">
+        <p id="result1">This text will be replaced </p>
+    </div>
 
-        <label for="form1_exponent">Enter an exponent</label>
-        <input type="number" id="form1_exponent" name="form1_exponent" value=2> <br>
 
-        <input type="button" onclick="powers()" value="Compute">
-    </form>
+    <div class="container">
+        <form>
+            <input type="radio" id="add" name="arithr" onclick="processRadio()">
+            <label for="add">+</label><br>
+            <input type="radio" id="minus" name="arithr" onclick="processRadio()">
+            <label for="minus">-</label><br>
+            <input type="radio" id="multiply" name="arith" onclick="processRadio()">
+            <label for="multiply">*</label><br>
+            <input type="radio" id="devide" name="arith" onclick="processRadio()">
+            <label for="devide">/</label><br>
+        </form>
+    </div>
+    <div class="container border bg-secondary">
+        <p id="result2">Results of Radio buttons will be shown here</p>
+    </div>
 
-    <p class="container id="resultValue">Base and Exponent Values will display here</p>
-
-    <br>
-    <h2>Basic operations</h2>
-    <form class="container borders">
-        <input type="radio" id="rg1_plus" name="operation" value="plus" onclick="processRadio()">
-        <label for="rg1_plus">+</label></br>
-
-        <input type="radio" id="rg1_minus" name="operation" value="minus" onclick="processRadio()">
-        <label for="rg1_minus">-</label></br>
-
-        <input type="radio" id="rg1_times" name="operation" value="times" onclick="processRadio()">
-        <label for="rg1_times">*</label></br>
-
-        <input type="radio" id="rg1_divide" name="operation" value="divide" onclick="processRadio()">
-        <label for="rg1_divide">/</label></br>
-    </form>
-
-    <p class="container id="radioButtonResult">This text will be replaced </p>
-
-    <br>
     <script>
+
         function powers() {
             console.log("Getting form values")
-            base = document.getElementById("form1_base").value
-            exponent = document.getElementById("form1_exponent").value
-            var result = "";
-            for (var i = 1; i <= exponent; i++) {
-                result += Math.pow(base, i) + " ";
+            base = document.getElementById("first_value").value
+            exponent = document.getElementById("second_value").value
+
+            let result = ""
+
+            for (first = 1; first <= exponent; first++) {
+                result = result + " " +
+                    Math.pow(base, first)
+
             }
-            out = document.getElementById("resultValue")
-            out.innerHTML = "Powers of " + base + " are: " + result;
+            document.getElementById("result1").innerHTML = "powers of " + base + " are: " + result
         }
-    </script>
-
-    <script>
         function processRadio() {
-            base = document.getElementById("form1_base").value
-            exponent = document.getElementById("form1_exponent").value
-            plus = document.getElementById("rg1_plus").checked
-            minus = document.getElementById("rg1_minus").checked
-            times = document.getElementById("rg1_times").checked
-            divide = document.getElementById("rg1_divide").checked
-            result = document.getElementById("radioButtonResult")
-
-            if (plus)
-                result.innerHTML = +base + +exponent
-            else if (minus)
-                result.innerHTML = base - exponent
-            else if (times)
-                result.innerHTML = base * exponent
-            else
-                result.innerHTML = base / exponent
+            base = document.getElementById("first_value").value
+            exponent = document.getElementById("second_value").value
+            result = 0
+            text = ""
+            if (document.getElementById("add").checked == true) {
+                result = +base + +exponent
+                text = "sum of " + base + " and " + exponent + " is " + result
+            } else if (document.getElementById("minus").checked == true) {
+                result = base - exponent
+                text = "Difference of " + base + " and " + exponent + " is " + result
+            } else if (document.getElementById("multiply").checked == true) {
+                result = base * exponent
+                text = "Product of " + base + " and " + exponent + " is " + result
+            } else if (document.getElementById("devide").checked = true) {
+                result = base / exponent
+                text = "Division of " + base + " and " + exponent + " is " + result
+            }
+            document.getElementById("result2").innerHTML = text
         }
     </script>
 
